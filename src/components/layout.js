@@ -8,6 +8,7 @@ class Layout extends React.Component {
     const { location, title, children } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
     let header
+    let isDashboard = this.props.isDashboard;
 
     if (location.pathname === rootPath) {
       header = (
@@ -60,8 +61,19 @@ class Layout extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <header>{header}</header>
-        <main>{children}</main>
+        {!isDashboard && (
+          <div
+            style={{
+              position: `fixed`,
+              top: `8px`,
+              right: `16px`,
+            }}
+          >
+            <Link to="/dashboard">Dashboard</Link>
+          </div>
+        )}
+        {header}
+        {children}
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
